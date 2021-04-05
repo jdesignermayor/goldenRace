@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="board-container">
+        <div class="ball-clean" *ngFor="let ball of ballsChances;let i = index" [ngClass]="'ball ' + ball.data.class">
+            {{ball.data.title}}
+        </div>
+    </div>
+    <div class="inputs-container">
+        <div class="section-1">
+            <div class="col-1">
+                <strong>{{counter}}x</strong>
+            </div>
+            <div class="col-2">
+                <input type="number" [(ngModel)]="amount">
+            </div>
+        </div>
+        <div class="section-2">
+            <button class="button button-primary" (click)="modifyAmount()">Ok</button>
+        </div>
+    </div>
+    <div class="summary-container">
+        <h2>Total: {{totalAmount}}€</h2>
+        <button class="button button-primary" [disabled]="disableBetButton" (click)="betAmount()">Place bet</button>
+        <p *ngIf="messageError" class="danger-message">
+            {{messageError}}
+        </p>
+    </div>
+    <div *ngIf="messageSuccess">
+        <p class="success-message">
+            {{messageSuccess}}
+        </p>
+    </div>
+</div>

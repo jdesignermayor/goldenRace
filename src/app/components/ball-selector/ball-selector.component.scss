@@ -1,0 +1,32 @@
+$primary: #0091ff;
+
+.selector {
+    display        : flex;
+    flex-direction : column;
+    align-items    : left;
+    justify-content: center;
+
+    .title {
+        color: #554e4d;
+    }
+
+    .board {
+        display        : flex;
+        justify-content: space-between;
+
+        .ball {
+            display        : flex;
+            align-items    : center;
+            justify-content: center;
+            width          : 5vh;
+            height         : 5vh;
+            border-radius  : 25px;
+            margin         : 0 5px 0px 0px;
+            cursor         : pointer;
+
+            &:hover {
+                border: 2px $primary solid;
+            }
+        }
+    }
+}

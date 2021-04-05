@@ -1,1 +1,115 @@
+$primary: #0091ff;
+
 /* You can add global styles to this file, and also import other style files */
+html {
+    background-color: #f3f2f8;
+}
+
+.buttons {
+    margin-top    : 25px;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+}
+
+.button {
+    font-size       : 1.3em;
+    width           : 100%;
+    height          : 55px;
+    border          : 0;
+    padding         : 0;
+    background-color: #fff;
+    color           : $primary;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        background-color: #e4e4e4;
+    }
+}
+
+.danger-message {
+    color: #dc5a5a;
+    font-size: 1.5em;
+}
+
+.success-message {
+    color: #56af6d;
+    font-size: 1.5em;
+}
+
+.ball {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 5vh;
+    height         : 5vh;
+    border-radius  : 50px;
+    margin         : 0 5px 0px 0px;
+    cursor         : pointer;
+}
+
+
+.button-primary {
+    background-color: $primary;
+    color           : #fff;
+
+    &:disabled {
+        background-color: rgb(156, 156, 156);
+    }
+    &:active {
+        background-color: #1877c0;
+    }
+}
+
+.ball-1 {
+    background-color: #db5c5b !important;
+    border          : 2px solid #a34040 !important;
+}
+
+.ball-2 {
+    background-color: #fff9e7 !important;
+    border          : 2px solid #bbb091 !important;
+}
+
+.ball-3 {
+    background-color: #56af6d !important;
+    border          : 2px solid #2d613b !important;
+}
+
+.ball-4 {
+    background-color: #ffeaee !important;
+    border          : 2px solid #cfacb3 !important;
+}
+
+.ball-5 {
+    background-color: #ffce1c !important;
+    border          : 2px solid #ffce1c !important;
+}
+
+.ball-6 {
+    background-color: #f0f5ef !important;
+    border          : 2px solid #c9c9c9 !important;
+}
+
+.ball-7 {
+    background-color: #dc5a5a !important;
+    border          : 2px solid #ac4646 !important;
+}
+
+.ball-8 {
+    background-color: #fff9e7 !important;
+    border: 2px solid #eee2be !important;
+}
+
+.ball-9 {
+    background-color: #56af6d !important;
+    border          : 2px solid #2d613b !important;
+}
+
+.ball-10 {
+    background-color: #ffeaee !important;
+    border          : 2px solid #cfacb3 !important;
+}

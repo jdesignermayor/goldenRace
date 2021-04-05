@@ -1,0 +1,14 @@
+<div class="selector">
+    <h1 class="title">Numbers</h1>
+    <div class="board">
+        <button class="ball" tabindex="1" (click)="addBall(ball)" [ngClass]="ball.class"
+            *ngFor="let ball of balls;let i = index" [disabled]="ball.disabled">
+            <p>{{ball.title}}</p>
+        </button>
+    </div>
+    <div class="buttons">
+        <button class="button">
+            Clear selection
+        </button>
+    </div>
+</div>
