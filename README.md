@@ -1,6 +1,6 @@
 # GoldenRace ANGULAR TEST
 
-This is the test for the selection process as a frontend dev in the company GoldenRace.
+Simple angular project abot Bets using angular and RXJS.
 
 ### This project its currently working on:
 
