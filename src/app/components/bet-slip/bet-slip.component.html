@@ -7,7 +7,7 @@
     <div class="inputs-container">
         <div class="section-1">
             <div class="col-1">
-                <strong>{{counter}}x</strong>
+                <strong>{{count}}x</strong>
             </div>
             <div class="col-2">
                 <input type="number" [(ngModel)]="amount">
@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="summary-container">
-        <h2>Total: {{totalAmount}}€</h2>
+        <h2>Total: {{totalAmount}} {{currencyCode}}</h2>
         <button class="button button-primary" [disabled]="disableBetButton" (click)="betAmount()">Place bet</button>
         <p *ngIf="messageError" class="danger-message">
             {{messageError}}

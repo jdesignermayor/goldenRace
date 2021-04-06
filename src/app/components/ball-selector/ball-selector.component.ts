@@ -1,4 +1,5 @@
 import { BallService } from '../../services/ball.service';
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,6 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class BallSelectorComponent implements OnInit {
 
   balls: Array<any> = [];
+  subscription: Subscription | undefined;
+  currencyCode: String = "";
+  gameResult: any;
+  gameResultTotalandProfit: number = 0;
 
   constructor(private ballService: BallService) {
   }
@@ -22,7 +27,7 @@ export class BallSelectorComponent implements OnInit {
       }
     });
 
-    this.ballService.getSelectedBalls(data);
+    this.ballService.setSelectedBalls(data);
   }
 
   ngOnInit(): void {
@@ -34,5 +39,12 @@ export class BallSelectorComponent implements OnInit {
         disabled: false,
       })
     }
+
+    this.currencyCode = this.ballService.currencyCode;
+
+    this.subscription = this.ballService.resultInfo$.subscribe(
+      info => {
+        this.gameResult = info;
+      });
   }
 }

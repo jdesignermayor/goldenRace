@@ -296,13 +296,19 @@ svg#clouds {
 .grid {
     width          : 100%;
     display        : flex;
-    align-items    : center;
     justify-content: center;
 
     .col {
         background-color: #fff;
         padding         : 22px;
-        height          : 250px;
         margin          : 14px;
+    }
+
+    .col-1 {
+        height: 100vh;
+    }
+
+    .col-2 {
+        height: 30vh;
     }
 }

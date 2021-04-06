@@ -1,4 +1,5 @@
 import { BallService } from '../../services/ball.service';
+
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,17 +16,17 @@ export class BetSlipComponent implements OnInit {
   ballsSelected: Array<any> = [];
   subscription: Subscription | undefined;
   disableBetButton: boolean = true;
+
   messageError: string = "";
   messageSuccess: string = "";
+
   amount: number = 0;
   totalAmount: number = 0;
-  counter: number = 0;
-  randomWinner: number = 0;
-  winner: any = undefined;
+  count: number = 0;
 
-  constructor(private ballService: BallService) {
+  currencyCode: String = "";
 
-  }
+  constructor(private ballService: BallService) { }
 
   ngOnInit(): void {
     for (let index = 1; index <= 8; index++) {
@@ -35,45 +36,75 @@ export class BetSlipComponent implements OnInit {
         data: []
       })
     }
-
+    this.currencyCode = this.ballService.currencyCode;
     this.subscription = this.ballService.ballInfo$.subscribe(
       info => {
-        this.ballsChances[this.counter].data = info;
+        this.ballsChances[this.count].data = info;
         this.ballsSelected.push(info.title)
-        this.counter++;
+        this.count++;
       });
   }
 
   modifyAmount(): void {
-    this.totalAmount = this.amount * this.counter;
+    this.totalAmount = this.amount * this.count;
     if (this.totalAmount >= 5) {
       this.disableBetButton = false;
       this.messageError = "";
     } else {
-      if (this.counter === 0) {
-        this.messageError = this.messageError + "Please pick your Ball."
+      if (this.count === 0) {
+        this.messageError = "Please pick your Ball."
       } else {
-        this.messageError = "the Minimum bet is 5 €";
+        this.messageError = "The minimum bet is 5 €";
       }
     }
   }
 
-  cheackRandomWinnerBall() {
-    return Math.floor(Math.random() * 10) + 1;
+  checkObjectResult(winnerBall: number) {
+    return new Promise<any>((resolve, reject) => {
+      try {
+        let gameResult = {
+          state: false,
+          ballNumberWin: 0,
+          betProfit: this.ballService.profit,
+          user: {
+            userBetAmount: 0,
+            userBetAmountAndProfit: 0,
+            userBetTotalAmount: 0,
+            userBetTotalAmountAndProfit: 0,
+            userBetBallWinNumber: 0,
+            userBetBalls: {},
+          }
+        }
+
+        if (winnerBall) {
+          const winNumber = this.ballsSelected.find(element => element === winnerBall);
+          if (winNumber) {
+            gameResult.state = true;
+            gameResult.user.userBetBallWinNumber = winNumber;
+          } else {
+            gameResult.state = false;
+          }
+          gameResult.ballNumberWin = winnerBall;
+          gameResult.user.userBetAmount = this.amount;
+          gameResult.user.userBetTotalAmount = this.totalAmount;
+          gameResult.user.userBetBalls = this.ballsSelected;
+          gameResult.user.userBetAmountAndProfit = ((gameResult.betProfit / 100) * this.totalAmount);
+          gameResult.user.userBetTotalAmountAndProfit = gameResult.user.userBetAmountAndProfit + this.totalAmount;
+
+          resolve(gameResult);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    })
+
   }
 
   betAmount(): void {
-    this.messageSuccess = "Betting...";
-    this.randomWinner = this.cheackRandomWinnerBall();
-    if (this.randomWinner) {
-      const found = this.ballsSelected.find(element => element === this.randomWinner);
-      if (found) {
-        this.winner = true;
-        alert("you won with: " + found)
-      } else {
-        alert("you lost, the winner is:" + this.randomWinner)
-      }
-    }
+    const winnerBall = this.ballService.checkRandomWinnerBall();
+    this.checkObjectResult(winnerBall).then((res) => {
+      this.ballService.setResult(res);
+    })
   }
 
   ngOnDestroy() {

@@ -6,15 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BallService {
-
-  ballsSelect: Array<any> = [];
-
   constructor() { }
 
-  private ballInfoSource = new Subject<any>();
-  ballInfo$ = this.ballInfoSource.asObservable();
+  public currencyCode: string = "€";
+  public profit: number = 1.5;
 
-  getSelectedBalls(data: any) {
+  private ballInfoSource = new Subject<any>();
+  private resultInfoSource = new Subject<any>();
+
+  ballInfo$ = this.ballInfoSource.asObservable();
+  resultInfo$ = this.resultInfoSource.asObservable();
+
+  checkRandomWinnerBall() {
+    return Math.floor(Math.random() * 10) + 1;
+  }
+
+  setSelectedBalls(data: any) {
     try {
       this.ballInfoSource.next(data);
     } catch (error) {
@@ -22,4 +29,7 @@ export class BallService {
     }
   }
 
+  setResult(data: any) {
+    this.resultInfoSource.next(data);
+  }
 }

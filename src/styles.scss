@@ -1,4 +1,9 @@
-$primary: #0091ff;
+:root {
+    --primary: #0091ff;
+    --error  : #db5c5b;
+    --success: #56af6d;
+}
+
 
 /* You can add global styles to this file, and also import other style files */
 html {
@@ -19,7 +24,7 @@ html {
     border          : 0;
     padding         : 0;
     background-color: #fff;
-    color           : $primary;
+    color           : var(--primary);
 
     &:hover {
         opacity: 0.8;
@@ -31,12 +36,12 @@ html {
 }
 
 .danger-message {
-    color: #dc5a5a;
+    color    : var(--error);
     font-size: 1.5em;
 }
 
 .success-message {
-    color: #56af6d;
+    color    : var(--success);
     font-size: 1.5em;
 }
 
@@ -53,12 +58,13 @@ html {
 
 
 .button-primary {
-    background-color: $primary;
+    background-color: var(--primary);
     color           : #fff;
 
     &:disabled {
         background-color: rgb(156, 156, 156);
     }
+
     &:active {
         background-color: #1877c0;
     }
@@ -101,7 +107,7 @@ html {
 
 .ball-8 {
     background-color: #fff9e7 !important;
-    border: 2px solid #eee2be !important;
+    border          : 2px solid #eee2be !important;
 }
 
 .ball-9 {

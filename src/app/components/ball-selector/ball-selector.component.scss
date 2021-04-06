@@ -1,14 +1,14 @@
-$primary: #0091ff;
+.title {
+    color    : #000;
+    font-size: 3em;
+}
 
 .selector {
-    display        : flex;
-    flex-direction : column;
-    align-items    : left;
-    justify-content: center;
-
-    .title {
-        color: #554e4d;
-    }
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    width         : 550px;
+    height        : 100%;
 
     .board {
         display        : flex;
@@ -25,8 +25,72 @@ $primary: #0091ff;
             cursor         : pointer;
 
             &:hover {
-                border: 2px $primary solid;
+                border: 2px var(--primary) solid;
             }
+        }
+    }
+}
+
+
+.ball-present {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    width          : 10vh;
+    height         : 10vh;
+    border-radius  : 52px;
+    margin         : 0 5px 0px 0px;
+    cursor         : pointer;
+    font-size      : 3em;
+}
+
+.template {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    text-align     : center;
+    justify-content: center;
+    width          : 100%;
+    font-size      : 1.5em;
+
+    .template-col {
+        width: 100%;
+
+        .template-info {
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
+            margin         : 5% 0 10% 0;
+        }
+
+        .title-success {
+            font-size: 4em;
+            color    : var(--success) !important;
+            margin   : 0;
+        }
+
+        .title-danger {
+            font-size: 4em;
+            color    : var(--error) !important;
+            margin   : 0;
+        }
+    }
+
+    .template-items {
+        display         : flex;
+        align-items     : center;
+        padding         : 19px;
+        justify-content : center;
+        background-color: #f7f7f7;
+        border-radius   : 24px;
+
+        .balls {
+            margin         : 0 35px 0 0;
+            display        : flex;
+            flex-direction : column;
+            align-items    : center;
+            justify-content: center;
         }
     }
 }
