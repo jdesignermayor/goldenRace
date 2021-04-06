@@ -1,7 +1,19 @@
-# GoldenRace
+# GoldenRace ANGULAR TEST
 
-this is the test the selection process as frontend dev in the company:
+This is the test for the selection process as a frontend dev in the company GoldenRace.
 
+### This project its currently working on:
+
+you can see that on : [link to Online project!](https://golden-race-lu7ssfvne-jdesignermayor.vercel.app/)
+
+### Important thing
+
+```
+For the process of data transmission between the components, I understand that it is best to use the @Input @Output decorators, but in this case observables are being used with RXJS
+
+```
+
+## Cli default information
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
 
