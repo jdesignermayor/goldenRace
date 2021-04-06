@@ -108,10 +108,8 @@ export class BetSlipComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // Unsubscribe an observable to prevent memory leak when component destroyed
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
-
 }

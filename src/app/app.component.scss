@@ -312,3 +312,19 @@ svg#clouds {
         height: 30vh;
     }
 }
+
+@media only screen and (max-width: 800px) {
+    .grid {
+        width          : 100%;
+        display        : grid;
+        justify-content: center;
+
+        .col-1 {
+            height: 50vh;
+        }
+
+        .col-2 {
+            height: 29vh;
+        }
+    }
+}

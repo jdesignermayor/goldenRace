@@ -20,7 +20,7 @@
             <div class="ball-present ball-{{gameResult.ballNumberWin}}">
                 {{gameResult.ballNumberWin}}
             </div>
-            <div *ngIf="gameResult.state === true" class="template-col">
+            <div *ngIf="gameResult.state === true" class="template-col win-image">
                 <div class="template-info">
                     <h1 class="title-success">You Won</h1>
                     <strong>Profit: {{gameResult.betProfit}}
@@ -55,7 +55,6 @@
                         </div>
                         <p class="danger-message" style="font-size: 21px;"> lost
                             -{{gameResult.user.userBetAmount}} {{currencyCode}}</p>
-
                     </div>
                 </div>
             </div>

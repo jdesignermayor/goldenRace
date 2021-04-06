@@ -20,13 +20,11 @@ export class BallSelectorComponent implements OnInit {
 
   addBall = (data: any) => {
     const { id } = data;
-
     this.balls.forEach(element => {
       if (element.id == id) {
         element.disabled = true;
       }
     });
-
     this.ballService.setSelectedBalls(data);
   }
 
@@ -46,5 +44,12 @@ export class BallSelectorComponent implements OnInit {
       info => {
         this.gameResult = info;
       });
+  }
+
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
