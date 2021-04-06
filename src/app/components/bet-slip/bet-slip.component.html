@@ -19,7 +19,8 @@
     </div>
     <div class="summary-container">
         <h2>Total: {{totalAmount}} {{currencyCode}}</h2>
-        <button class="button button-primary" [disabled]="disableBetButton" (click)="betAmount()">Place bet</button>
+        <button class="button button-primary" *ngIf="enabledBetButtonBet"  [disabled]="disableBetButton" (click)="betAmount()">Place bet</button>
+        <button class="button button-primary" *ngIf="enabledBetButtonAgain" (click)="betAmountAgain()">Start again</button>
         <p *ngIf="messageError" class="danger-message">
             {{messageError}}
         </p>

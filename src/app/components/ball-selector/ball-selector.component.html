@@ -8,7 +8,7 @@
             </button>
         </div>
         <div class="buttons">
-            <button class="button">
+            <button class="button" (click)="cleanSelection()">
                 Clear selection
             </button>
         </div>
@@ -20,7 +20,7 @@
             <div class="ball-present ball-{{gameResult.ballNumberWin}}">
                 {{gameResult.ballNumberWin}}
             </div>
-            <div *ngIf="gameResult.state === true" class="template-col win-image">
+            <div *ngIf="gameResult.state === 1" class="template-col win-image">
                 <div class="template-info">
                     <h1 class="title-success">You Won</h1>
                     <strong>Profit: {{gameResult.betProfit}}
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="gameResult.state === false" class="template-col">
+            <div *ngIf="gameResult.state === 2" class="template-col">
                 <div class="template-info">
                     <h1 class="title-danger">You lost</h1>
                     <strong class="danger-message">Total lost: {{gameResult.user.userBetTotalAmount.toFixed(2)}}

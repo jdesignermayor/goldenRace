@@ -28,7 +28,15 @@ export class BallSelectorComponent implements OnInit {
     this.ballService.setSelectedBalls(data);
   }
 
+  cleanSelection = () => {
+    this.balls.forEach(element => {
+      element.disabled = false;
+    });
+    this.ballService.clearSelectedBalls();
+  }
+
   ngOnInit(): void {
+
     for (let index = 1; index <= 10; index++) {
       this.balls.push({
         id: index,
@@ -42,10 +50,16 @@ export class BallSelectorComponent implements OnInit {
 
     this.subscription = this.ballService.resultInfo$.subscribe(
       info => {
-        this.gameResult = info;
+        if (info.state === 0) {
+          this.gameResult = "";
+          this.balls.forEach(element => {
+              element.disabled = false;
+          });
+        } else {
+          this.gameResult = info;
+        }
       });
   }
-
 
   ngOnDestroy() {
     if (this.subscription) {

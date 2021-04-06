@@ -17,6 +17,9 @@ export class BetSlipComponent implements OnInit {
   subscription: Subscription | undefined;
   disableBetButton: boolean = true;
 
+  enabledBetButtonAgain: boolean = false;
+  enabledBetButtonBet: boolean = true;
+
   messageError: string = "";
   messageSuccess: string = "";
 
@@ -39,9 +42,19 @@ export class BetSlipComponent implements OnInit {
     this.currencyCode = this.ballService.currencyCode;
     this.subscription = this.ballService.ballInfo$.subscribe(
       info => {
-        this.ballsChances[this.count].data = info;
-        this.ballsSelected.push(info.title)
-        this.count++;
+        if (info.length === 0) {
+          this.clearSelection();
+        } else {
+          this.ballsChances[this.count].data = info;
+          this.ballsSelected.push(info.title)
+          this.count++;
+          if (this.totalAmount > 0) {
+            this.disableBetButton = false;
+          }else{
+            this.disableBetButton = true;
+          }
+          this.messageError = "";
+        }
       });
   }
 
@@ -63,7 +76,7 @@ export class BetSlipComponent implements OnInit {
     return new Promise<any>((resolve, reject) => {
       try {
         let gameResult = {
-          state: false,
+          state: 0,
           ballNumberWin: 0,
           betProfit: this.ballService.profit,
           user: {
@@ -79,10 +92,10 @@ export class BetSlipComponent implements OnInit {
         if (winnerBall) {
           const winNumber = this.ballsSelected.find(element => element === winnerBall);
           if (winNumber) {
-            gameResult.state = true;
+            gameResult.state = 1;
             gameResult.user.userBetBallWinNumber = winNumber;
           } else {
-            gameResult.state = false;
+            gameResult.state = 2;
           }
           gameResult.ballNumberWin = winnerBall;
           gameResult.user.userBetAmount = this.amount;
@@ -101,10 +114,47 @@ export class BetSlipComponent implements OnInit {
   }
 
   betAmount(): void {
-    const winnerBall = this.ballService.checkRandomWinnerBall();
-    this.checkObjectResult(winnerBall).then((res) => {
-      this.ballService.setResult(res);
-    })
+    if (this.count > 0) {
+      const winnerBall = this.ballService.checkRandomWinnerBall();
+      this.checkObjectResult(winnerBall).then((res) => {
+        this.ballService.setResult(res);
+        this.enabledBetButtonAgain = true;
+        this.enabledBetButtonBet = false;
+      })
+    }
+  }
+
+  clearSelection(): void {
+    this.ballsSelected = [];
+    this.ballsChances.forEach(element => {
+      element.data = [];
+    });
+    this.count = 0;
+  }
+
+  betAmountAgain(): void {
+    let gameResult = {
+      state: 0,
+      ballNumberWin: 0,
+      betProfit: this.ballService.profit,
+      user: {
+        userBetAmount: 0,
+        userBetAmountAndProfit: 0,
+        userBetTotalAmount: 0,
+        userBetTotalAmountAndProfit: 0,
+        userBetBallWinNumber: 0,
+        userBetBalls: {},
+      }
+    }
+    this.ballService.setResult(gameResult);
+    this.enabledBetButtonAgain = false;
+    this.enabledBetButtonBet = true;
+
+    this.clearSelection();
+    this.ballService.clearSelectedBalls();
+    this.amount = 0;
+    this.totalAmount = 0;
+    this.disableBetButton = true;
   }
 
   ngOnDestroy() {
