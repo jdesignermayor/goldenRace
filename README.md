@@ -9,7 +9,7 @@ you can see that on : [link to Online project!](https://golden-race-lu7ssfvne-jd
 ### Important thing
 
 ```
-For the process of data transmission between the components, I understand that it is best to use the @Input @Output decorators, but in this case observables are being used with RXJS
+For the process of data transmission between the components, I understand that it is best to use the @Input & @Output decorators, but in this case observables are being used with RXJS inside of ball.service.ts,
 
 ```
 
